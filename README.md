@@ -1,4 +1,4 @@
-# httpbin(1): HTTP Request & Response Service
+# httpbin: HTTP Request & Response Service
 
 Run locally:
 ```sh
