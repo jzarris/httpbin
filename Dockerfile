@@ -1,9 +1,9 @@
 FROM ubuntu:18.04
 
 LABEL name="httpbin"
-LABEL version="0.9.2"
+LABEL version="0.9.3"
 LABEL description="A simple HTTP service."
-LABEL org.kennethreitz.vendor="Kenneth Reitz"
+LABEL org.jzarris.vendor="Jack Zarris"
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
@@ -15,7 +15,11 @@ WORKDIR /httpbin
 RUN /bin/bash -c "pip3 install --no-cache-dir -r <(pipenv lock -r)"
 
 ADD . /httpbin
+RUN pip3 install gunicorn
+RUN pip3 install gevent
+RUN pip3 install gunicorn
 RUN pip3 install --no-cache-dir /httpbin
+RUN pip3 install Flask
 
 EXPOSE 80
 
