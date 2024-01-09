@@ -396,7 +396,7 @@ def view_anything(anything=None):
         description: Anything passed in request
     """
 
-    #begin section
+    #begin status_code section
 
     codes = request.args.get('status_code')
 
@@ -424,8 +424,23 @@ def view_anything(anything=None):
 
       code = weighted_choice(choices)
 
-      return status_code(code)
-    #end section
+      if code == 200:
+        return jsonify(
+         get_dict(
+            "url",
+            "args",
+            "headers",
+            "origin",
+            "method",
+            "form",
+            "data",
+            "files",
+            "json",
+         )
+        )
+      else:
+        return status_code(code)
+    #end status_code section
     return jsonify(
         get_dict(
             "url",

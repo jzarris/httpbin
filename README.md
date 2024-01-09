@@ -1,17 +1,20 @@
 # httpbin(1): HTTP Request & Response Service
 
-
-A [Kenneth Reitz](http://kennethreitz.org/bitcoin) Project.
-
-![ice cream](http://farm1.staticflickr.com/572/32514669683_4daf2ab7bc_k_d.jpg)
-
 Run locally:
 ```sh
-docker pull kennethreitz/httpbin
-docker run -p 80:80 kennethreitz/httpbin
+docker pull jzarris/httpbin
+docker run -p 80:80 jzarris/httpbin
 ```
 
 See http://httpbin.org for more information.
+
+## Added status_code query arg to /anything
+You can use the same status code syntax from `/status` for the query argument `status_code` for the path `/anything`
+Example: 
+```
+/anything?status_code=200:0.9,500:0.1
+```
+When the status code 200 is returned, the normal requests data will be reflected in the response data.
 
 ## Officially Deployed at:
 
