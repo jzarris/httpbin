@@ -421,8 +421,7 @@ def view_anything(anything=None):
                 "json",
               )
             )
-      else:
-        return status_code(code)
+          
 
       choices = []
       for choice in codes.split(","):
@@ -456,19 +455,6 @@ def view_anything(anything=None):
       else:
         return status_code(code)
     #end status_code section
-    return jsonify(
-        get_dict(
-            "url",
-            "args",
-            "headers",
-            "origin",
-            "method",
-            "form",
-            "data",
-            "files",
-            "json",
-        )
-    )
 
 #impart add new anything path /app
 @app.route("/app", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"])
@@ -547,6 +533,7 @@ def view_app(anything=None):
       else:
         return status_code(code)
     #end status_code section
+    
     return jsonify(
         get_dict(
             "url",
