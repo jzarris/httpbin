@@ -407,7 +407,22 @@ def view_anything(anything=None):
               code = int(codes)
           except ValueError:
               return Response("Invalid status code", status=400)
-          return status_code(code)
+          if code == 200:
+            return jsonify(
+              get_dict(
+                "url",
+                "args",
+                "headers",
+                "origin",
+                "method",
+                "form",
+                "data",
+                "files",
+                "json",
+              )
+            )
+      else:
+        return status_code(code)
 
       choices = []
       for choice in codes.split(","):
@@ -484,7 +499,21 @@ def view_app(anything=None):
               code = int(codes)
           except ValueError:
               return Response("Invalid status code", status=400)
-          return status_code(code)
+          if code == 200:
+            return jsonify(
+              get_dict(
+                "url",
+                "args",
+                "headers",
+                "origin",
+                "method",
+                "form",
+                "data",
+                "files",
+                "json",
+              )
+            )
+          
 
       choices = []
       for choice in codes.split(","):
