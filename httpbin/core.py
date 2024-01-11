@@ -461,7 +461,7 @@ def view_anything(anything=None):
     "/app/<path:anything>",
     methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"],
 )
-def view_app(app=None):
+def view_app(anything=None):
     """Returns anything passed in request data.
     ---
     tags:
