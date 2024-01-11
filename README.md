@@ -3,7 +3,7 @@
 Run locally:
 ```sh
 docker pull jzarris/httpbin
-docker run -p 80:80 jzarris/httpbin
+docker run -p 8080:80 jzarris/httpbin
 ```
 
 See http://httpbin.org for more information.
