@@ -457,9 +457,9 @@ def view_anything(anything=None):
     #end status_code section
 
 #impart add new anything path /app
-@app.route("/app", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"])
+@app.route("/api", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"])
 @app.route(
-    "/app/<path:anything>",
+    "/api/<path:anything>",
     methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"],
 )
 def view_app(anything=None):
