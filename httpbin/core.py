@@ -456,7 +456,7 @@ def view_anything(anything=None):
         return status_code(code)
     #end status_code section
 
-#impart add new anything path /app
+#impart add new anything path /api
 @app.route("/api", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"])
 @app.route(
     "/api/<path:anything>",
@@ -547,6 +547,84 @@ def view_app(anything=None):
             "json",
         )
     )
+
+#impart add new anything path /apiv2
+@app.route("/apiv2", methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"])
+@app.route(
+    "/apiv2/<path:anything>",
+    methods=["GET", "POST", "PUT", "DELETE", "PATCH", "TRACE"],
+)
+def view_app(anything=None):
+    """Returns anything passed in request data.
+    ---
+    tags:
+      - Anything
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Anything passed in request
+    """
+
+    #begin status_code section
+
+    codes = request.args.get('status_code')
+
+    if codes:
+
+      if "," not in codes:
+          try:
+              code = int(codes)
+          except ValueError:
+              return Response("Invalid status code", status=400)
+          if code == 200:
+            return jsonify(
+              get_dict(
+                "url",
+                "headers",
+                "origin",
+                "method"
+              )
+            )
+          
+
+      choices = []
+      for choice in codes.split(","):
+          if ":" not in choice:
+              code = choice
+              weight = 1
+          else:
+              code, weight = choice.split(":")
+
+          try:
+              choices.append((int(code), float(weight)))
+          except ValueError:
+              return Response("Invalid status code", status=400)
+
+      code = weighted_choice(choices)
+
+      if code == 200:
+        return jsonify(
+         get_dict(
+            "url",
+            "headers",
+            "origin",
+            "method"
+         )
+        )
+      else:
+        return status_code(code)
+    #end status_code section
+    
+    return jsonify(
+        get_dict(
+            "url",
+            "headers",
+            "origin",
+            "method"
+        )
+    )
+
 
 @app.route("/post", methods=("POST",))
 def view_post():
